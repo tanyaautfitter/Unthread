@@ -8,13 +8,12 @@ export default function Footer() {
         <nav className="site-foot-col" aria-label="Документи">
           <h2 className="site-foot-title">Документи</h2>
           <Link href="/privacy">Політика конфіденційності</Link>
-          <Link href="/privacy#deletion">Видалення даних</Link>
+          <Link href="/terms">Умови використання</Link>
           <Link href="/cookies">Політика файлів cookie</Link>
         </nav>
 
         <div className="site-foot-col">
           <h2 className="site-foot-title">Контакти</h2>
-          <span>Підтримка</span>
           <a href={`mailto:${site.email}`} className="site-foot-mail">
             {site.email}
           </a>

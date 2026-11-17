@@ -95,7 +95,7 @@ node .next/standalone/server.js   # скопіюйте .next/static у .next/sta
 
 ## 4. Футер і юридичні сторінки
 
-- `/privacy` — Політика конфіденційності, `/cookies` — Політика файлів cookie. Посилання на них є у футері кожної сторінки.
+- `/privacy` — Політика конфіденційності, `/terms` — Умови використання, `/cookies` — Політика файлів cookie. Посилання на них є у футері кожної сторінки.
 - **Перед публікацією** вкажіть власника й email у `lib/site.ts` або змінних `NEXT_PUBLIC_OPERATOR`, `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_OPERATOR_CITY`.
 - Для App Review у Meta: **Privacy Policy URL** = `https://<домен>/privacy`, **Data Deletion Instructions URL** = `https://<домен>/privacy#deletion`.
 - Якщо додасте аналітику (Google Analytics тощо), оновіть `/cookies` і додайте банер згоди.
@@ -130,6 +130,7 @@ app/
   api/analyze/route.ts   — бекенд: Threads → класифікація → JSON
   api/health/route.ts    — health-check
   privacy/page.tsx       — Політика конфіденційності
+  terms/page.tsx         — Умови використання
   cookies/page.tsx       — Політика файлів cookie
   components/Footer.tsx  — футер
 lib/
