@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import type { AnalyzeResult, ClassifiedPost, Sentiment } from "@/lib/types";
+import FloatingPosts from "./components/FloatingPosts";
 
 const COLUMNS: Array<{ key: Sentiment; title: string; emoji: string }> = [
   { key: "negative", title: "Негативні", emoji: "−" },
@@ -65,6 +66,7 @@ export default function Home() {
   return (
     <main className="wrap">
       <header className={`hero${!data && !loading ? " hero-center" : ""}`}>
+        {!data && !loading && <FloatingPosts />}
         <h1>Що кажуть про бренд у&nbsp;Threads?</h1>
 
         <form className="search" onSubmit={onSubmit} role="search">

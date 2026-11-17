@@ -27,8 +27,43 @@ button { font: inherit; cursor: pointer; }
 /* ---------- Hero ---------- */
 .hero { text-align: center; padding: 72px 0 32px; }
 .hero-center {
-  min-height: calc(100vh - 32px); padding: 0 0 12vh;
+  position: relative; min-height: calc(100vh - 32px); padding: 0 0 12vh;
   display: flex; flex-direction: column; justify-content: center;
+}
+.hero-center > :not(.floaters) { position: relative; z-index: 1; }
+
+/* ---------- Floating Threads-style posts ---------- */
+.floaters {
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
+  overflow: hidden; pointer-events: none; z-index: 0;
+}
+.floater {
+  position: absolute; width: 250px; padding: 12px 14px 10px; text-align: left;
+  background: #fff; border: 1px solid #ececec; border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  transform: rotate(var(--r)) scale(var(--s));
+  animation: floaty 7s ease-in-out infinite;
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(var(--r)) scale(var(--s)); }
+  50% { transform: translateY(-10px) rotate(var(--r)) scale(var(--s)); }
+}
+@media (prefers-reduced-motion: reduce) { .floater { animation: none; } }
+.fp-head { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.fp-avatar {
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  color: #fff; font-weight: 700; font-size: 13px; flex: none;
+}
+.fp-user { font-weight: 600; color: #101010; }
+.fp-time { color: #999; }
+.fp-more { margin-left: auto; color: #999; letter-spacing: 1px; }
+.fp-text { margin: 6px 0 10px 36px; font-size: 14px; line-height: 1.4; color: #101010; }
+.fp-actions { display: flex; align-items: center; gap: 16px; margin-left: 36px; color: #6b6b6b; font-size: 12px; }
+.fp-actions span { display: inline-flex; align-items: center; gap: 4px; }
+@media (max-width: 860px) {
+  .floater { display: none; }
+  .floater-mobile { display: block; width: 200px; opacity: 0.55 !important; }
+  .floater-mobile .fp-text { font-size: 13px; }
 }
 .logo { font-weight: 700; font-size: 15px; letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 8px; }
 .logo-mark {
@@ -151,7 +186,7 @@ h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.08; letter-spacing: -0.03
 
 
 /* ---------- Site footer ---------- */
-html, body { min-height: 100%; }
+html, body { min-height: 100%; overflow-x: hidden; }
 body { display: flex; flex-direction: column; min-height: 100vh; }
 body > main { flex: 1; width: 100%; }
 .site-foot { margin-top: 220px; background: #fafafa; border-top: 1px solid var(--line); color: var(--ink); }
