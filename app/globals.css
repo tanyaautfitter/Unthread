@@ -27,49 +27,8 @@ button { font: inherit; cursor: pointer; }
 /* ---------- Hero ---------- */
 .hero { text-align: center; padding: 72px 0 32px; }
 .hero-center {
-  position: relative; min-height: calc(100vh - 32px); padding: 0 0 12vh;
+  min-height: calc(100vh - 32px); padding: 0 0 12vh;
   display: flex; flex-direction: column; justify-content: center;
-}
-.hero-center > :not(.floaters) { position: relative; }
-
-/* ---------- Floating Threads-style posts ---------- */
-.floaters {
-  position: absolute; top: -32px; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
-  overflow: hidden; pointer-events: none; z-index: 0;
-}
-.hero-center > :not(.floaters) { z-index: 200; }
-.floaters::after {
-  content: ""; position: absolute; inset: 0; z-index: 150;
-  background: radial-gradient(ellipse 60% 55% at 50% 48%, #fff 55%, rgba(255, 255, 255, 0.55) 100%);
-}
-
-.floater {
-  position: absolute; width: 250px; padding: 12px 14px 10px; text-align: left;
-  background: #fff; border: 1px solid #efefef; border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-  filter: saturate(0.7);
-  transform: rotate(var(--r));
-  animation: floaty 8s ease-in-out infinite;
-}
-@keyframes floaty {
-  0%, 100% { transform: translateY(0) rotate(var(--r)); }
-  50% { transform: translateY(-8px) rotate(var(--r)); }
-}
-@media (prefers-reduced-motion: reduce) { .floater { animation: none; } }
-.fp-head { display: flex; align-items: center; gap: 8px; font-size: 12px; }
-.fp-avatar { width: 26px; height: 26px; border-radius: 50%; background: #e4e4e7; flex: none; }
-.fp-name { width: 70px; height: 9px; border-radius: 5px; background: #e4e4e7; }
-.fp-time { color: #999; }
-.fp-more { margin-left: auto; color: #999; letter-spacing: 1px; }
-.fp-text { margin: 6px 0 8px 34px; font-size: 13px; line-height: 1.4; color: #101010; }
-.fp-images { display: flex; gap: 6px; margin: 0 0 8px 34px; }
-.fp-images span { flex: 1; height: 58px; border-radius: 8px; display: grid; place-items: center; font-size: 30px; }
-.fp-actions { display: flex; align-items: center; gap: 14px; margin-left: 34px; color: #6b6b6b; font-size: 12px; }
-.fp-actions span { display: inline-flex; align-items: center; gap: 4px; }
-
-@media (max-width: 860px) {
-  .floater { width: 190px; }
-  .floater-side, .floater-extra { display: none; }
 }
 
 .logo { font-weight: 700; font-size: 15px; letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 8px; }
@@ -193,7 +152,7 @@ h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.08; letter-spacing: -0.03
 
 
 /* ---------- Site footer ---------- */
-html, body { min-height: 100%; overflow-x: hidden; }
+html, body { min-height: 100%; }
 body { display: flex; flex-direction: column; min-height: 100vh; }
 body > main { flex: 1; width: 100%; }
 .site-foot { margin-top: 220px; background: #fafafa; border-top: 1px solid var(--line); color: var(--ink); }
