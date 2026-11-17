@@ -9,7 +9,7 @@ export const site = {
   /** Хто є власником (володільцем) персональних даних: ФОП або компанія */
   operator: process.env.NEXT_PUBLIC_OPERATOR || "[ФОП Прізвище Ім'я По батькові]",
   city: process.env.NEXT_PUBLIC_OPERATOR_CITY || "Київ, Україна",
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "privacy@hovir.live",
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "contact.app.creator@gmail.com",
   /** Дата набрання чинності політик */
   effectiveDate: "17 листопада 2026 р.",
   year: 2026,
