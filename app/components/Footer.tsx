@@ -22,7 +22,7 @@ export default function Footer() {
 
       <div className="site-foot-bottom">
         <span>
-          © {site.year} {site.name}. {site.operator}
+          © {site.year} {site.name}
         </span>
         <span>Threads є торговою маркою Meta Platforms, Inc. Сайт не пов'язаний з Meta.</span>
       </div>
