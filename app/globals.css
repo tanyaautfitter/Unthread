@@ -156,20 +156,20 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
 body > main { flex: 1; width: 100%; }
 .site-foot { margin-top: 220px; background: #fafafa; border-top: 1px solid var(--line); color: var(--ink); }
 .site-foot-inner {
-  max-width: 1180px; margin: 0 auto; padding: 56px 20px 48px;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  max-width: 1180px; margin: 0 auto; padding: 20px 20px 16px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
 }
 @media (max-width: 640px) { .site-foot-inner { grid-template-columns: 1fr; } }
-.site-foot-col { display: flex; flex-direction: column; gap: 18px; font-size: 20px; }
+.site-foot-col { display: flex; flex-direction: column; gap: 5px; font-size: 14px; }
 .site-foot-title {
-  margin: 0 0 6px; font-size: 13px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+  margin: 0 0 4px; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted);
 }
 .site-foot-col a { color: var(--ink); text-decoration: none; }
 .site-foot-col a:hover { text-decoration: underline; }
-.site-foot-col a.site-foot-mail { color: #d4572a; text-decoration: underline; text-underline-offset: 3px; }
+.site-foot-col a.site-foot-mail { color: #d4572a; text-decoration: underline; text-underline-offset: 2px; }
 .site-foot-bottom {
-  max-width: 1180px; margin: 0 auto; padding: 18px 20px 28px; border-top: 1px solid var(--line);
-  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted);
+  max-width: 1180px; margin: 0 auto; padding: 8px 20px 10px; border-top: 1px solid var(--line);
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; font-size: 11px; color: var(--muted);
 }
 
 /* ---------- Legal pages ---------- */
