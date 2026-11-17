@@ -1,99 +1,24 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import LegalPage from "../components/LegalPage";
+import CookiesUk from "../components/legal/CookiesUk";
+import CookiesEn from "../components/legal/CookiesEn";
+import { dict } from "@/lib/i18n";
+import { getLang } from "@/lib/i18n-server";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: `Політика файлів cookie — ${site.name}`,
-  description: `Які файли cookie використовує ${site.name}.`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getLang();
+  return {
+    title: `${dict[lang].cookies} — ${site.name}`,
+    description: lang === "uk" ? "Які файли cookie використовує Unthread." : "Which cookies Unthread uses.",
+  };
+}
 
-export default function CookiesPage() {
-  const mail = <a href={`mailto:${site.email}`}>{site.email}</a>;
-
+export default async function Page() {
+  const lang = await getLang();
   return (
-    <LegalPage title="Політика файлів cookie">
-      <p className="legal-lead">
-        Коротко: {site.name} не встановлює жодних файлів cookie — ні необхідних, ні аналітичних, ні рекламних. Тому на
-        сайті немає банера згоди.
-      </p>
-
-      <h2>1. Що таке файли cookie</h2>
-      <p>
-        Файли cookie — невеликі текстові файли, які сайт зберігає у вашому браузері, щоб, наприклад, запам'ятати мову,
-        вхід в акаунт або зібрати статистику відвідувань. Схожим чином працюють локальне сховище браузера (localStorage)
-        та інші технології, тож ця Політика стосується й їх.
-      </p>
-
-      <h2>2. Що ми використовуємо</h2>
-      <div className="legal-table">
-        <table>
-          <thead>
-            <tr>
-              <th>Категорія</th>
-              <th>Чи використовуємо</th>
-              <th>Пояснення</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Необхідні</td>
-              <td>Ні</td>
-              <td>Сайт не має акаунтів і налаштувань, які треба запам'ятовувати.</td>
-            </tr>
-            <tr>
-              <td>Аналітичні</td>
-              <td>Ні</td>
-              <td>Ми не підключаємо Google Analytics чи інші системи статистики.</td>
-            </tr>
-            <tr>
-              <td>Рекламні та відстежувальні</td>
-              <td>Ні</td>
-              <td>Реклами на сайті немає, ми не відстежуємо вас на інших сайтах.</td>
-            </tr>
-            <tr>
-              <td>localStorage / sessionStorage</td>
-              <td>Ні</td>
-              <td>Результати пошуку зберігаються лише на сторінці до її закриття.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h2>3. Треті сторони</h2>
-      <p>
-        На сторінках сайту немає вбудованих віджетів, пікселів чи скриптів сторонніх сервісів. Посилання «відкрити ↗»
-        біля постів ведуть на сайт Threads. Коли ви переходите за ними, діють правила Meta щодо файлів cookie, а не ця
-        Політика.
-      </p>
-      <p>
-        Хостинг-провайдер (Vercel) може обробляти технічні дані запитів для доставки сайту та захисту від атак, але не
-        встановлює файлів cookie для відстеження відвідувачів. Детальніше — у{" "}
-        <Link href="/privacy">Політиці конфіденційності</Link>.
-      </p>
-
-      <h2>4. Чи потрібна ваша згода</h2>
-      <p>
-        Ні. Оскільки сайт не встановлює файлів cookie, згода не потрібна. Якщо ми колись додамо аналітику або інші
-        файли cookie, що потребують згоди, ми:
-      </p>
-      <ul>
-        <li>оновимо цю Політику та вкажемо назву, мету, тип і строк дії кожного файлу;</li>
-        <li>покажемо банер, де можна буде прийняти або відхилити необов'язкові файли cookie;</li>
-        <li>не встановлюватимемо їх до того, як ви дасте згоду.</li>
-      </ul>
-
-      <h2>5. Як керувати файлами cookie</h2>
-      <p>
-        У будь-якому браузері можна переглянути, заблокувати чи видалити файли cookie в налаштуваннях конфіденційності.
-        Для цього сайту блокування нічого не змінить — він працюватиме так само.
-      </p>
-
-      <h2>6. Контакти</h2>
-      <p>
-        Питання щодо цієї Політики надсилайте на {mail}. Як ми обробляємо дані загалом, описано в{" "}
-        <Link href="/privacy">Політиці конфіденційності</Link>.
-      </p>
+    <LegalPage title={dict[lang].cookies} lang={lang}>
+      {lang === "uk" ? <CookiesUk /> : <CookiesEn />}
     </LegalPage>
   );
 }

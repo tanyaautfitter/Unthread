@@ -156,7 +156,7 @@ h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.08; letter-spacing: -0.03
 
 /* ---------- Site footer ---------- */
 html, body { min-height: 100%; }
-body { display: flex; flex-direction: column; min-height: 100vh; }
+body { display: flex; flex-direction: column; min-height: 100vh; position: relative; }
 body > main { flex: 1; width: 100%; }
 .site-foot { margin-top: 220px; background: #fafafa; border-top: 1px solid var(--line); color: var(--ink); }
 .site-foot-inner {
@@ -194,3 +194,15 @@ body > main { flex: 1; width: 100%; }
 .legal th, .legal td { text-align: left; padding: 10px 14px; vertical-align: top; border-bottom: 1px solid var(--line); }
 .legal tr:last-child td { border-bottom: 0; }
 .legal th { font-weight: 600; background: var(--neu-soft); }
+
+/* ---------- Language switcher ---------- */
+.lang-switch {
+  position: absolute; top: 16px; right: 20px; z-index: 10;
+  display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 18px; background: #fff;
+}
+.lang-switch button {
+  border: 0; background: transparent; color: var(--muted); font-size: 13px; font-weight: 600;
+  padding: 5px 11px; border-radius: 14px; letter-spacing: 0.02em;
+}
+.lang-switch button:hover { color: var(--ink); }
+.lang-switch button.active { background: var(--accent); color: #fff; }

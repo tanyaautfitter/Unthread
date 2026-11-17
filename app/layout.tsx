@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Footer from "./components/Footer";
+import LangSwitcher from "./components/LangSwitcher";
+import { dict } from "@/lib/i18n";
+import { getLang } from "@/lib/i18n-server";
 
-export const metadata: Metadata = {
-  title: "Unthread — що кажуть про бренд у Threads",
-  description: "Введіть назву бренду й дізнайтеся, скільки позитивних, негативних і нейтральних згадок про нього в Threads.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = dict[await getLang()];
+  return { title: t.metaTitle, description: t.metaDescription };
+}
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const lang = await getLang();
   return (
-    <html lang="uk">
+    <html lang={lang}>
       <body>
+        <LangSwitcher lang={lang} label={dict[lang].langLabel} />
         {children}
-        <Footer />
+        <Footer lang={lang} />
       </body>
     </html>
   );

@@ -1,15 +1,16 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { dict, type Lang } from "@/lib/i18n";
 
-export default function LegalPage(props: { title: string; children: React.ReactNode }) {
+export default function LegalPage(props: { title: string; lang: Lang; children: React.ReactNode }) {
+  const t = dict[props.lang];
   return (
     <main className="legal">
       <Link href="/" className="legal-back">
-        ← На головну
+        {t.backHome}
       </Link>
       <h1>{props.title}</h1>
       <p className="legal-date">
-        Набирає чинності: {site.effectiveDate} · Остання редакція: {site.effectiveDate}
+        {t.effective}: {t.effectiveDate} · {t.revised}: {t.effectiveDate}
       </p>
       {props.children}
     </main>

@@ -3,9 +3,15 @@ import type { ThreadsPost } from "./types";
 const GRAPH = "https://graph.threads.net/v1.0";
 const FIELDS = "id,text,username,permalink,timestamp,media_type";
 
+export type ThreadsErrorKind = "network" | "auth" | "permission" | "rate" | "other";
+
 export class ThreadsError extends Error {
-  constructor(message: string, public status = 502) {
-    super(message);
+  constructor(
+    public kind: ThreadsErrorKind,
+    public detail = "",
+    public status = 502,
+  ) {
+    super(`${kind}: ${detail}`);
   }
 }
 
@@ -48,7 +54,7 @@ export async function searchThreads(
     try {
       res = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(15_000) });
     } catch {
-      throw new ThreadsError("Не вдалося з'єднатися з Threads API. Спробуйте пізніше.", 503);
+      throw new ThreadsError("network", "", 503);
     }
     const body = (await res.json().catch(() => ({}))) as ThreadsPage;
 
@@ -58,18 +64,15 @@ export async function searchThreads(
         .filter(Boolean)
         .join(" · ");
       if (e?.code === 10) {
-        throw new ThreadsError(
-          `Threads: у токена немає дозволу threads_keyword_search. Згенеруйте токен заново з цим дозволом (${msg})`,
-          403,
-        );
+        throw new ThreadsError("permission", msg, 403);
       }
       if (res.status === 401 || body.error?.code === 190) {
-        throw new ThreadsError(`Threads: недійсний або прострочений токен (${msg})`, 401);
+        throw new ThreadsError("auth", msg, 401);
       }
       if (body.error?.code === 4 || body.error?.code === 17 || res.status === 429) {
-        throw new ThreadsError(`Threads: вичерпано ліміт пошукових запитів (${msg})`, 429);
+        throw new ThreadsError("rate", msg, 429);
       }
-      throw new ThreadsError(`Threads API помилка: ${msg}`);
+      throw new ThreadsError("other", msg);
     }
 
     for (const p of body.data ?? []) {

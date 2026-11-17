@@ -1,19 +1,21 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
+import { dict, type Lang } from "@/lib/i18n";
 
-export default function Footer() {
+export default function Footer({ lang }: { lang: Lang }) {
+  const t = dict[lang];
   return (
     <footer className="site-foot">
       <div className="site-foot-inner">
-        <nav className="site-foot-col" aria-label="Документи">
-          <h2 className="site-foot-title">Документи</h2>
-          <Link href="/privacy">Політика конфіденційності</Link>
-          <Link href="/terms">Умови використання</Link>
-          <Link href="/cookies">Політика файлів cookie</Link>
+        <nav className="site-foot-col" aria-label={t.footerDocs}>
+          <h2 className="site-foot-title">{t.footerDocs}</h2>
+          <Link href="/privacy">{t.privacy}</Link>
+          <Link href="/terms">{t.terms}</Link>
+          <Link href="/cookies">{t.cookies}</Link>
         </nav>
 
         <div className="site-foot-col">
-          <h2 className="site-foot-title">Контакти</h2>
+          <h2 className="site-foot-title">{t.footerContacts}</h2>
           <a href={`mailto:${site.email}`} className="site-foot-mail">
             {site.email}
           </a>
@@ -24,7 +26,7 @@ export default function Footer() {
         <span>
           © {site.year} {site.name}
         </span>
-        <span>Threads є торговою маркою Meta Platforms, Inc. Сайт взагалі ніяк не пов'язаний з Meta.</span>
+        <span>{t.disclaimer}</span>
       </div>
     </footer>
   );

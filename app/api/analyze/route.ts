@@ -1,5 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
-import { searchThreads, ThreadsError } from "@/lib/threads";
+import { searchThreads, ThreadsError, type ThreadsErrorKind } from "@/lib/threads";
+import type { Lang } from "@/lib/i18n";
+
+const MESSAGES: Record<Lang, Record<ThreadsErrorKind | "input" | "busy" | "server", string>> = {
+  uk: {
+    input: "Введіть назву бренду (від 2 до 80 символів).",
+    busy: "Забагато запитів. Спробуйте за хвилину.",
+    server: "Внутрішня помилка сервера.",
+    network: "Не вдалося з'єднатися з Threads. Спробуйте пізніше.",
+    auth: "Threads: недійсний або прострочений токен.",
+    permission: "Threads: у токена немає дозволу на пошук. Згенеруйте токен заново з дозволом threads_keyword_search.",
+    rate: "Threads: вичерпано ліміт пошукових запитів. Спробуйте пізніше.",
+    other: "Помилка Threads API.",
+  },
+  en: {
+    input: "Enter a brand name (2 to 80 characters).",
+    busy: "Too many requests. Please try again in a minute.",
+    server: "Internal server error.",
+    network: "Could not connect to Threads. Please try again later.",
+    auth: "Threads: the access token is invalid or expired.",
+    permission: "Threads: the token has no search permission. Generate a new token with threads_keyword_search.",
+    rate: "Threads: the search rate limit has been reached. Please try again later.",
+    other: "Threads API error.",
+  },
+};
 import { classifyWithClaude, classifyWithLexicon, type Label } from "@/lib/sentiment";
 import { cacheGet, cacheSet, rateLimited } from "@/lib/cache";
 import { demoPosts } from "@/lib/demo";
@@ -30,9 +54,11 @@ function clientIp(req: NextRequest): string {
 
 export async function GET(req: NextRequest) {
   const brand = (req.nextUrl.searchParams.get("q") ?? "").trim().replace(/\s+/g, " ");
+  const lang: Lang = req.nextUrl.searchParams.get("lang") === "en" ? "en" : "uk";
+  const m = MESSAGES[lang];
 
   if (brand.length < 2 || brand.length > 80) {
-    return NextResponse.json({ error: "Введіть назву бренду (від 2 до 80 символів)." }, { status: 400 });
+    return NextResponse.json({ error: m.input }, { status: 400 });
   }
 
   const cacheKey = `${env.searchType}:${brand.toLowerCase()}`;
@@ -40,7 +66,7 @@ export async function GET(req: NextRequest) {
   if (cached) return NextResponse.json({ ...cached, cached: true });
 
   if (rateLimited(clientIp(req), env.rateLimit)) {
-    return NextResponse.json({ error: "Забагато запитів. Спробуйте за хвилину." }, { status: 429 });
+    return NextResponse.json({ error: m.busy }, { status: 429 });
   }
 
   const notes: string[] = [];
@@ -122,9 +148,10 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(result);
   } catch (e) {
     if (e instanceof ThreadsError) {
-      return NextResponse.json({ error: e.message }, { status: e.status });
+      const detail = e.detail ? ` (${e.detail})` : "";
+      return NextResponse.json({ error: m[e.kind] + detail }, { status: e.status });
     }
     console.error(e);
-    return NextResponse.json({ error: "Внутрішня помилка сервера." }, { status: 500 });
+    return NextResponse.json({ error: m.server }, { status: 500 });
   }
 }
