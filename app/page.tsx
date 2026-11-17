@@ -9,7 +9,7 @@ const COLUMNS: Array<{ key: Sentiment; title: string; emoji: string }> = [
   { key: "neutral", title: "Нейтральні", emoji: "○" },
 ];
 
-const SUGGESTIONS = ["Укрзалізниця", "Бажане", "Monobank", "Cher17", "Nova Poshta"];
+const SUGGESTIONS = ["Укрзалізниця", "Бажане", "One by One", "Cher17", "Estro"];
 
 function plural(n: number): string {
   const m10 = n % 10;
