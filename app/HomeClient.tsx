@@ -10,8 +10,6 @@ const COLUMNS: Array<{ key: Sentiment; emoji: string }> = [
   { key: "neutral", emoji: "○" },
 ];
 
-const SUGGESTIONS = ["Adore Shoes", "Укрзалізниця", "Бажане", "One by One", "Cher17", "Estro"];
-
 function formatDate(iso: string | undefined, locale: string): string {
   if (!iso) return "";
   const d = new Date(iso);
@@ -87,12 +85,12 @@ export default function HomeClient({ lang }: { lang: Lang }) {
         {!loading && (
           <p className="hints">
             <span className="hints-label">{t.tryLabel}</span>
-            {SUGGESTIONS.map((s, i) => (
+            {t.suggestions.map((s, i) => (
               <span key={s}>
                 <button type="button" className="hint" onClick={() => void run(s)}>
                   {s}
                 </button>
-                {i < SUGGESTIONS.length - 1 && <span className="hint-sep">·</span>}
+                {i < t.suggestions.length - 1 && <span className="hint-sep">·</span>}
               </span>
             ))}
           </p>
