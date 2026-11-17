@@ -9,7 +9,7 @@ const COLUMNS: Array<{ key: Sentiment; title: string; emoji: string }> = [
   { key: "neutral", title: "Нейтральні", emoji: "○" },
 ];
 
-const SUGGESTIONS = ["Укрзалізниця", "Бажане", "Monobank", "Cher17"];
+const SUGGESTIONS = ["Укрзалізниця", "Бажане", "Monobank", "Cher17", "Nova Poshta"];
 
 function plural(n: number): string {
   const m10 = n % 10;
@@ -84,20 +84,24 @@ export default function Home() {
               maxLength={80}
               autoFocus
             />
+            <button type="submit" disabled={loading}>
+              {loading ? <span className="spinner" aria-label="Пошук…" /> : "Пошук"}
+            </button>
           </div>
-          <button type="submit" disabled={loading}>
-            {loading ? <span className="spinner" aria-label="Пошук…" /> : "Пошук"}
-          </button>
         </form>
 
         {!loading && (
-          <div className="chips">
-            {SUGGESTIONS.map((s) => (
-              <button key={s} type="button" className="chip" onClick={() => void run(s)}>
-                {s}
-              </button>
+          <p className="hints">
+            <span className="hints-label">Спробуйте:</span>
+            {SUGGESTIONS.map((s, i) => (
+              <span key={s}>
+                <button type="button" className="hint" onClick={() => void run(s)}>
+                  {s}
+                </button>
+                {i < SUGGESTIONS.length - 1 && <span className="hint-sep">·</span>}
+              </span>
             ))}
-          </div>
+          </p>
         )}
       </header>
 
