@@ -64,7 +64,7 @@ export default function Home() {
 
   return (
     <main className="wrap">
-      <header className="hero">
+      <header className={`hero${!data && !loading ? " hero-center" : ""}`}>
         <h1>Що кажуть про бренд у&nbsp;Threads?</h1>
 
         <form className="search" onSubmit={onSubmit} role="search">
