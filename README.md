@@ -1,4 +1,4 @@
-# Unthread — тональність згадок бренду в Threads
+# Hovir — тональність згадок бренду в Threads
 
 Вебсайт: вводите назву бренду → система шукає публічні пости в Threads → AI розкладає згадки на три колонки:
 
@@ -80,8 +80,8 @@ vercel --prod
 ### Варіант Б — Docker (будь-який VPS)
 
 ```bash
-docker build -t unthread:1.0.0 .
-docker run -d -p 3000:3000 --env-file .env.local --name unthread unthread:1.0.0
+docker build -t hovir:1.0.0 .
+docker run -d -p 3000:3000 --env-file .env.local --name hovir hovir:1.0.0
 ```
 
 Перед ним поставте Nginx/Caddy з HTTPS.

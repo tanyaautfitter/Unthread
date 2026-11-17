@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
   return {
     title: `${dict[lang].privacy} — ${site.name}`,
-    description: lang === "uk" ? "Які дані обробляє Unthread, навіщо, як довго зберігає та які у вас права." : "What data Unthread processes, why, for how long, and your rights.",
+    description: lang === "uk" ? "Які дані обробляє Hovir, навіщо, як довго зберігає та які у вас права." : "What data Hovir processes, why, for how long, and your rights.",
   };
 }
 

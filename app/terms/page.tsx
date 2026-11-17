@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
   return {
     title: `${dict[lang].terms} — ${site.name}`,
-    description: lang === "uk" ? "Правила користування сервісом Unthread." : "Rules for using the Unthread service.",
+    description: lang === "uk" ? "Правила користування сервісом Hovir." : "Rules for using the Hovir service.",
   };
 }
 

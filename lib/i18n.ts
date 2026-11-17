@@ -49,7 +49,7 @@ export function mentions(n: number, lang: Lang): string {
 
 export const dict = {
   uk: {
-    metaTitle: "Unthread — що кажуть про бренд у Threads",
+    metaTitle: "Hovir — що кажуть про бренд у Threads",
     metaDescription:
       "Введіть назву бренду й дізнайтеся, скільки позитивних, негативних і нейтральних згадок про нього в Threads.",
     heading: "Що кажуть про бренд у Threads?",
@@ -81,7 +81,7 @@ export const dict = {
     effectiveDate: "17 листопада 2026 р.",
   },
   en: {
-    metaTitle: "Unthread — what people say about a brand on Threads",
+    metaTitle: "Hovir — what people say about a brand on Threads",
     metaDescription:
       "Enter a brand name to see how many positive, negative and neutral mentions it has on Threads.",
     heading: "What are people saying about a brand on Threads?",

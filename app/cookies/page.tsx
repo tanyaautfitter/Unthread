@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const lang = await getLang();
   return {
     title: `${dict[lang].cookies} — ${site.name}`,
-    description: lang === "uk" ? "Які файли cookie використовує Unthread." : "Which cookies Unthread uses.",
+    description: lang === "uk" ? "Які файли cookie використовує Hovir." : "Which cookies Hovir uses.",
   };
 }
 
