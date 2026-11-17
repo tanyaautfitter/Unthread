@@ -1,6 +1,6 @@
 /**
  * Декоративний фон стартового екрана: купа карток у стилі постів Threads,
- * накладених одна на одну, і чорні діагональні стрічки з текстом позаду.
+ * накладених одна на одну. У картках з «фото» — одяг, взуття, сумки.
  * Тексти вигадані, імен людей немає. Генерація детермінована (seed),
  * тож сервер і браузер малюють однакову картинку.
  */
@@ -24,11 +24,20 @@ const TEXTS = [
   "Чому ніхто не говорить, наскільки це зручно?",
 ];
 
-const IMG_COLORS = [
-  ["#d9a066", "#b9773c"],
-  ["#3b3b3b", "#8a6d4b"],
-  ["#c9d6df", "#7c98ab"],
-  ["#e8c4b8", "#b07d6a"],
+/** «Фото» в картках: речі гардеробу на пастельному тлі */
+const ITEMS = [
+  { e: "👟", bg: "#eef1f4" },
+  { e: "👜", bg: "#f6eee8" },
+  { e: "👗", bg: "#f3eef4" },
+  { e: "🧥", bg: "#eef2ee" },
+  { e: "👠", bg: "#f7eeee" },
+  { e: "🕶️", bg: "#efefef" },
+  { e: "🧢", bg: "#eef1f6" },
+  { e: "👖", bg: "#ecf0f5" },
+  { e: "👢", bg: "#f4efe9" },
+  { e: "🎒", bg: "#eef3f1" },
+  { e: "👚", bg: "#f6f0f3" },
+  { e: "🧣", bg: "#f5efea" },
 ];
 
 interface Card {
@@ -62,10 +71,10 @@ function buildCards(count: number): Card[] {
   while (cards.length < count && guard < 5000) {
     guard++;
     // ліва верхня точка картки у % від ширини/висоти екрана
-    const x = -6 + rand() * 96;
-    const y = -8 + rand() * 98;
+    const x = -9 + rand() * 102;
+    const y = -12 + rand() * 104;
     // картка ≈ 20% ширини і 20% висоти; тримаємо центр вільним для заголовка і пошуку
-    const overlapsCenter = x + 18 > 21 && x < 79 && y + 18 > 24 && y < 66;
+    const overlapsCenter = x + 18 > 15 && x < 85 && y + 18 > 16 && y < 74;
     if (overlapsCenter) continue;
     const i = cards.length;
     cards.push({
@@ -78,21 +87,15 @@ function buildCards(count: number): Card[] {
       likes: Math.floor(rand() * 400),
       replies: Math.floor(rand() * 60),
       time: TIMES[Math.floor(rand() * TIMES.length)],
-      images: rand() < 0.3 ? 2 : 0,
-      side: y + 18 > 20 && y < 70,
+      images: rand() < 0.45 ? 2 : 0,
+      side: y + 18 > 14 && y < 76,
     });
   }
   return cards;
 }
 
-const CARDS = buildCards(44);
+const CARDS = buildCards(56);
 
-const RIBBONS = [
-  { cls: "rb-1", text: "UNTHREAD • ЩО КАЖУТЬ ПРО БРЕНД • " },
-  { cls: "rb-2", text: "BRAND CHECK • THREADS • ВІДГУКИ • " },
-  { cls: "rb-3", text: "ПОЗИТИВ • НЕГАТИВ • НЕЙТРАЛ • " },
-  { cls: "rb-4", text: "UNTHREAD • BRAND • CHECK • " },
-];
 
 function Icon({ d }: { d: string }) {
   return (
@@ -110,16 +113,10 @@ const SHARE = "M21 3 10 14M21 3l-7 18-4-7-7-4 18-7Z";
 export default function FloatingPosts() {
   return (
     <div className="floaters" aria-hidden="true">
-      {RIBBONS.map((r) => (
-        <div key={r.cls} className={`ribbon ${r.cls}`}>
-          <span>{r.text.repeat(6)}</span>
-        </div>
-      ))}
-
       {CARDS.map((c) => (
         <div
           key={c.id}
-          className={`floater${c.side ? " floater-side" : ""}${c.id >= 22 ? " floater-extra" : ""}`}
+          className={`floater${c.side ? " floater-side" : ""}${c.id >= 26 ? " floater-extra" : ""}`}
           style={
             {
               left: `${c.x}%`,
@@ -139,8 +136,10 @@ export default function FloatingPosts() {
           <p className="fp-text">{c.text}</p>
           {c.images > 0 && (
             <div className="fp-images">
-              {IMG_COLORS.slice(c.id % 3, (c.id % 3) + 2).map(([a, b]) => (
-                <span key={a} style={{ background: `linear-gradient(135deg, ${a}, ${b})` }} />
+              {[ITEMS[(c.id * 5) % ITEMS.length], ITEMS[(c.id * 5 + 7) % ITEMS.length]].map((it) => (
+                <span key={it.e} style={{ background: it.bg }}>
+                  {it.e}
+                </span>
               ))}
             </div>
           )}
