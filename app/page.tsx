@@ -14,9 +14,9 @@ const SUGGESTIONS = ["Укрзалізниця", "Бажане", "Monobank", "Ch
 function plural(n: number): string {
   const m10 = n % 10;
   const m100 = n % 100;
-  if (m10 === 1 && m100 !== 11) return "відгук";
-  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return "відгуки";
-  return "відгуків";
+  if (m10 === 1 && m100 !== 11) return "згадування";
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return "згадування";
+  return "згадувань";
 }
 
 function formatDate(iso?: string): string {
@@ -122,7 +122,11 @@ export default function Home() {
 
       {data && !loading && (
         <>
+          <h2 className="results-title">
+            «{data.brand}»: {total > 0 ? `${total} ${plural(total)}` : "нічого не знайдено"}
+          </h2>
 
+          {total > 0 && (
           <section className="grid">
             {COLUMNS.map((c) => (
               <Column
@@ -136,6 +140,7 @@ export default function Home() {
               />
             ))}
           </section>
+          )}
         </>
       )}
     </main>
@@ -151,7 +156,10 @@ function Column(props: {
   posts: ClassifiedPost[];
 }) {
   const [expanded, setExpanded] = useState(false);
-  const visible = expanded ? props.posts : props.posts.slice(0, 5);
+  const sorted = [...props.posts].sort(
+    (a, b) => new Date(b.timestamp ?? 0).getTime() - new Date(a.timestamp ?? 0).getTime(),
+  );
+  const visible = expanded ? sorted : sorted.slice(0, 1);
 
   return (
     <div className={`col col-${props.sentiment}`}>
@@ -159,12 +167,14 @@ function Column(props: {
         <span className="col-mark">{props.mark}</span>
         <span className="col-title">{props.title}</span>
       </div>
+      <div className="col-stat">
       <div className="col-count">
         {props.count}
         <span className="col-pct">{props.pct}%</span>
       </div>
       <div className="col-label">
         {props.count} {plural(props.count)}
+      </div>
       </div>
 
       <ul className="posts">
@@ -185,9 +195,9 @@ function Column(props: {
         {props.posts.length === 0 && <li className="empty">Немає згадок</li>}
       </ul>
 
-      {props.posts.length > 5 && (
+      {props.posts.length > 1 && (
         <button type="button" className="more" onClick={() => setExpanded((v) => !v)}>
-          {expanded ? "Згорнути" : `Показати всі (${props.posts.length})`}
+          {expanded ? "Згорнути" : `Подивитись ще (${props.posts.length - 1})`}
         </button>
       )}
     </div>
