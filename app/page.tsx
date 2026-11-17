@@ -122,39 +122,6 @@ export default function Home() {
 
       {data && !loading && (
         <>
-          <section className="summary">
-            <div className="summary-top">
-              <h2>
-                «{data.brand}»: {total} {plural(total)}
-              </h2>
-              <div className="badges">
-                {data.source === "demo" && <span className="badge warn">демо-дані</span>}
-                <span className="badge">{data.classifier === "claude" ? "AI-аналіз" : "словниковий аналіз"}</span>
-                {data.cached && <span className="badge">з кешу</span>}
-              </div>
-            </div>
-            {total > 0 && (
-              <div className="bar" role="img" aria-label="Розподіл тональності">
-                {COLUMNS.map((c) =>
-                  data.counts[c.key] > 0 ? (
-                    <div
-                      key={c.key}
-                      className={`bar-seg seg-${c.key}`}
-                      style={{ flexGrow: data.counts[c.key] }}
-                      title={`${c.title}: ${data.counts[c.key]}`}
-                    />
-                  ) : null,
-                )}
-              </div>
-            )}
-            {data.notes.length > 0 && (
-              <ul className="notes">
-                {data.notes.map((n) => (
-                  <li key={n}>{n}</li>
-                ))}
-              </ul>
-            )}
-          </section>
 
           <section className="grid">
             {COLUMNS.map((c) => (
