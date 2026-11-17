@@ -3,7 +3,7 @@ import "./globals.css";
 import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
-  title: "BrandPulse — що кажуть про бренд у Threads",
+  title: "Unthread — що кажуть про бренд у Threads",
   description: "Введіть назву бренду й дізнайтеся, скільки позитивних, негативних і нейтральних згадок про нього в Threads.",
 };
 

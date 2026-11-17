@@ -66,7 +66,7 @@ export default function Home() {
     <main className="wrap">
       <header className="hero">
         <div className="logo">
-          <span className="logo-mark">@</span> BrandPulse
+          <span className="logo-mark">@</span> Unthread
         </div>
         <h1>Що кажуть про бренд у&nbsp;Threads?</h1>
         <p className="sub">
