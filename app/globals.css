@@ -30,41 +30,61 @@ button { font: inherit; cursor: pointer; }
   position: relative; min-height: calc(100vh - 32px); padding: 0 0 12vh;
   display: flex; flex-direction: column; justify-content: center;
 }
-.hero-center > :not(.floaters) { position: relative; z-index: 1; }
+.hero-center > :not(.floaters) { position: relative; }
 
 /* ---------- Floating Threads-style posts ---------- */
 .floaters {
-  position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
+  position: absolute; top: -32px; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
   overflow: hidden; pointer-events: none; z-index: 0;
 }
+.hero-center > :not(.floaters) { z-index: 200; }
+.hero-center h1 { text-shadow: 0 0 24px #fff, 0 0 12px #fff; }
+
+.ribbon {
+  position: absolute; width: 1000px; height: 64px; background: #111; color: #fff; z-index: 55;
+  display: flex; align-items: center; overflow: hidden; white-space: nowrap;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+}
+.ribbon span { font-size: 34px; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; padding-left: 20px; }
+.rb-1 { top: 4%; left: -280px; transform: rotate(-32deg); }
+.rb-2 { top: 10%; right: -300px; transform: rotate(30deg); }
+.rb-3 { bottom: 14%; left: -320px; transform: rotate(22deg); }
+.rb-4 { bottom: 4%; right: -260px; transform: rotate(-26deg); }
+
 .floater {
   position: absolute; width: 250px; padding: 12px 14px 10px; text-align: left;
-  background: #fff; border: 1px solid #ececec; border-radius: 16px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-  transform: rotate(var(--r)) scale(var(--s));
-  animation: floaty 7s ease-in-out infinite;
+  background: #fff; border: 1px solid #e9e9e9; border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  transform: rotate(var(--r));
+  animation: floaty 8s ease-in-out infinite;
 }
 @keyframes floaty {
-  0%, 100% { transform: translateY(0) rotate(var(--r)) scale(var(--s)); }
-  50% { transform: translateY(-10px) rotate(var(--r)) scale(var(--s)); }
+  0%, 100% { transform: translateY(0) rotate(var(--r)); }
+  50% { transform: translateY(-8px) rotate(var(--r)); }
 }
 @media (prefers-reduced-motion: reduce) { .floater { animation: none; } }
-.fp-head { display: flex; align-items: center; gap: 8px; font-size: 13px; }
-.fp-avatar {
-  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
-  color: #fff; font-weight: 700; font-size: 13px; flex: none;
-}
-.fp-user { font-weight: 600; color: #101010; }
+.fp-head { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.fp-avatar { width: 26px; height: 26px; border-radius: 50%; background: #e4e4e7; flex: none; }
+.fp-name { width: 70px; height: 9px; border-radius: 5px; background: #e4e4e7; }
 .fp-time { color: #999; }
 .fp-more { margin-left: auto; color: #999; letter-spacing: 1px; }
-.fp-text { margin: 6px 0 10px 36px; font-size: 14px; line-height: 1.4; color: #101010; }
-.fp-actions { display: flex; align-items: center; gap: 16px; margin-left: 36px; color: #6b6b6b; font-size: 12px; }
+.fp-text { margin: 6px 0 8px 34px; font-size: 13px; line-height: 1.4; color: #101010; }
+.fp-images { display: flex; gap: 6px; margin: 0 0 8px 34px; }
+.fp-images span { flex: 1; height: 54px; border-radius: 8px; }
+.fp-actions { display: flex; align-items: center; gap: 14px; margin-left: 34px; color: #6b6b6b; font-size: 12px; }
 .fp-actions span { display: inline-flex; align-items: center; gap: 4px; }
+
 @media (max-width: 860px) {
-  .floater { display: none; }
-  .floater-mobile { display: block; width: 200px; opacity: 0.55 !important; }
-  .floater-mobile .fp-text { font-size: 13px; }
+  .floater { width: 190px; }
+  .floater-side, .floater-extra { display: none; }
+  .ribbon { width: 520px; height: 44px; }
+  .ribbon span { font-size: 22px; }
+  .rb-1 { top: 2%; left: -200px; }
+  .rb-2 { top: 6%; right: -220px; }
+  .rb-3 { bottom: 12%; left: -230px; }
+  .rb-4 { bottom: 2%; right: -200px; }
 }
+
 .logo { font-weight: 700; font-size: 15px; letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 8px; }
 .logo-mark {
   display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;

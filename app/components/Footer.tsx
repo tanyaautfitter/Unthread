@@ -24,7 +24,7 @@ export default function Footer() {
         <span>
           © {site.year} {site.name}
         </span>
-        <span>Threads є торговою маркою Meta Platforms, Inc. Сайт не пов'язаний з Meta.</span>
+        <span>Threads є торговою маркою Meta Platforms, Inc. Сайт взагалі ніяк не пов'язаний з Meta.</span>
       </div>
     </footer>
   );
