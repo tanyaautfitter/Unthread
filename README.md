@@ -93,7 +93,15 @@ npm ci && npm run build
 node .next/standalone/server.js   # скопіюйте .next/static у .next/standalone/.next/static
 ```
 
-## 4. API
+## 4. Футер і юридичні сторінки
+
+- `/privacy` — Політика конфіденційності, `/cookies` — Політика файлів cookie. Посилання на них є у футері кожної сторінки.
+- **Перед публікацією** вкажіть власника й email у `lib/site.ts` або змінних `NEXT_PUBLIC_OPERATOR`, `NEXT_PUBLIC_CONTACT_EMAIL`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_OPERATOR_CITY`.
+- Для App Review у Meta: **Privacy Policy URL** = `https://<домен>/privacy`, **Data Deletion Instructions URL** = `https://<домен>/privacy#deletion`.
+- Якщо додасте аналітику (Google Analytics тощо), оновіть `/cookies` і додайте банер згоди.
+- Тексти не є юридичною консультацією — перед запуском варто показати юристу.
+
+## 5. API
 
 `GET /api/analyze?q=<бренд>`
 
@@ -113,7 +121,7 @@ node .next/standalone/server.js   # скопіюйте .next/static у .next/sta
 
 `GET /api/health` → стан і які ключі підключені.
 
-## 5. Структура
+## 6. Структура
 
 ```
 app/
@@ -121,21 +129,25 @@ app/
   globals.css            — стилі (світла/темна тема)
   api/analyze/route.ts   — бекенд: Threads → класифікація → JSON
   api/health/route.ts    — health-check
+  privacy/page.tsx       — Політика конфіденційності
+  cookies/page.tsx       — Політика файлів cookie
+  components/Footer.tsx  — футер
 lib/
+  site.ts                — дані власника для футера й політик
   threads.ts             — клієнт Threads keyword_search з пагінацією
   sentiment.ts           — Claude-класифікатор + резервний словниковий
   cache.ts               — кеш з TTL і rate-limit на IP
   demo.ts                — демо-пости
 ```
 
-## 6. Обмеження, які варто знати
+## 7. Обмеження, які варто знати
 
 - **Це вибірка, а не вся історія.** API віддає найновіші або топові пости, тому цифри варто читати як «з останніх N згадок».
 - Пошук іде за точною назвою. Варіанти написання («Нова Пошта» / «Nova Poshta») — це окремі запити.
 - Кеш і rate-limit зберігаються в пам'яті процесу. Для кількох інстансів замініть `lib/cache.ts` на Redis / Vercel KV.
 - Токен Threads живе 60 днів — поставте нагадування на оновлення або автоматизуйте `refresh_access_token`.
 
-## 7. Ідеї для v1.1
+## 8. Ідеї для v1.1
 
 - Пошук кількох варіантів назви одночасно.
 - Графік тональності по днях.

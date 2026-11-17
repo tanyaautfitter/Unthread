@@ -165,11 +165,6 @@ export default function Home() {
           </section>
         </>
       )}
-
-      <footer className="foot">
-        Дані: офіційний Threads API (публічні пости). Аналіз тональності: Claude. Результат базується на вибірці
-        останніх згадок, а не на всій історії.
-      </footer>
     </main>
   );
 }
