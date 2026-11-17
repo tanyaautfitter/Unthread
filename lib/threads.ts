@@ -12,7 +12,7 @@ export class ThreadsError extends Error {
 interface ThreadsPage {
   data?: Array<{ id: string; text?: string; username?: string; permalink?: string; timestamp?: string }>;
   paging?: { next?: string; cursors?: { after?: string } };
-  error?: { message?: string; code?: number; type?: string };
+  error?: { message?: string; code?: number; type?: string; error_subcode?: number; error_user_title?: string };
 }
 
 /**
@@ -53,7 +53,16 @@ export async function searchThreads(
     const body = (await res.json().catch(() => ({}))) as ThreadsPage;
 
     if (!res.ok || body.error) {
-      const msg = body.error?.message ?? `HTTP ${res.status}`;
+      const e = body.error;
+      const msg = [e?.message ?? `HTTP ${res.status}`, e?.error_user_title, e?.code && `code ${e.code}`, e?.error_subcode && `subcode ${e.error_subcode}`]
+        .filter(Boolean)
+        .join(" · ");
+      if (e?.code === 10) {
+        throw new ThreadsError(
+          `Threads: у токена немає дозволу threads_keyword_search. Згенеруйте токен заново з цим дозволом (${msg})`,
+          403,
+        );
+      }
       if (res.status === 401 || body.error?.code === 190) {
         throw new ThreadsError(`Threads: недійсний або прострочений токен (${msg})`, 401);
       }
