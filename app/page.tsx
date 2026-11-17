@@ -9,7 +9,7 @@ const COLUMNS: Array<{ key: Sentiment; title: string; emoji: string }> = [
   { key: "neutral", title: "Нейтральні", emoji: "○" },
 ];
 
-const SUGGESTIONS = ["Nova Poshta", "Monobank", "Rozetka", "Apple", "Nike"];
+const SUGGESTIONS = ["Укрзалізниця", "Бажане", "Monobank", "Cher17"];
 
 function plural(n: number): string {
   const m10 = n % 10;
@@ -65,20 +65,14 @@ export default function Home() {
   return (
     <main className="wrap">
       <header className="hero">
-        <div className="logo">
-          <span className="logo-mark">@</span> Unthread
-        </div>
-        <h1>Що кажуть про бренд у&nbsp;Threads?</h1>
-        <p className="sub">
-          Введіть назву бренду. Ми знайдемо публічні згадки й розкладемо їх на позитивні, негативні та нейтральні.
-        </p>
+        <h1>Бренд чек у&nbsp;Threads</h1>
 
         <form className="search" onSubmit={onSubmit} role="search">
           <input
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Наприклад, Nova Poshta"
+            placeholder="Назва бренду"
             aria-label="Назва бренду"
             maxLength={80}
             autoFocus
@@ -88,7 +82,7 @@ export default function Home() {
           </button>
         </form>
 
-        {!data && !loading && (
+        {!loading && (
           <div className="chips">
             {SUGGESTIONS.map((s) => (
               <button key={s} type="button" className="chip" onClick={() => void run(s)}>

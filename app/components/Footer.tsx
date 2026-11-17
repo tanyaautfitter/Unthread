@@ -5,21 +5,20 @@ export default function Footer() {
   return (
     <footer className="site-foot">
       <div className="site-foot-inner">
-        <div className="site-foot-brand">
-          <Link href="/" className="logo">
-            <span className="logo-mark">@</span> {site.name}
-          </Link>
-          <p>
-            Аналіз тональності публічних згадок брендів у Threads. Дані: офіційний Threads API. Результат базується на
-            вибірці останніх згадок, а не на всій історії.
-          </p>
-        </div>
-
-        <nav className="site-foot-links" aria-label="Юридична інформація">
+        <nav className="site-foot-col" aria-label="Документи">
+          <h2 className="site-foot-title">Документи</h2>
           <Link href="/privacy">Політика конфіденційності</Link>
+          <Link href="/privacy#deletion">Видалення даних</Link>
           <Link href="/cookies">Політика файлів cookie</Link>
-          <a href={`mailto:${site.email}`}>{site.email}</a>
         </nav>
+
+        <div className="site-foot-col">
+          <h2 className="site-foot-title">Контакти</h2>
+          <span>Підтримка</span>
+          <a href={`mailto:${site.email}`} className="site-foot-mail">
+            {site.email}
+          </a>
+        </div>
       </div>
 
       <div className="site-foot-bottom">
