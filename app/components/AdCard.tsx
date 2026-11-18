@@ -40,18 +40,18 @@ export default function AdCard({ lang }: { lang: Lang }) {
           <span className="ad-meta">
             <span className="ad-name">{ad.name}</span>
             <span className="ad-label">{ad.label[lang]}</span>
+            <span className="ad-stores">
+              <a href={ad.appStore} target="_blank" rel="noopener sponsored">
+                App Store
+              </a>
+              <span aria-hidden="true">·</span>
+              <a href={ad.googlePlay} target="_blank" rel="noopener sponsored">
+                Google Play
+              </a>
+            </span>
           </span>
           <span key={text} className="ad-text">
             {text}
-          </span>
-          <span className="ad-stores">
-            <a href={ad.appStore} target="_blank" rel="noopener sponsored">
-              App Store
-            </a>
-            <span aria-hidden="true">·</span>
-            <a href={ad.googlePlay} target="_blank" rel="noopener sponsored">
-              Google Play
-            </a>
           </span>
         </div>
         <a className="ad-cta" href={primary} target="_blank" rel="noopener sponsored">
