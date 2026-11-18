@@ -139,7 +139,7 @@ export default function HomeClient({ lang }: { lang: Lang }) {
           )}
         </>
       )}
-      <AdCard lang={lang} />
+      {data && !loading && <AdCard key={data.brand} lang={lang} />}
     </main>
   );
 }

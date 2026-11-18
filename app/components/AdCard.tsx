@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import "@fontsource/playfair-display/latin-500-italic.css";
+import "@fontsource/playfair-display/cyrillic-500-italic.css";
 import { autfitterAd as ad } from "@/lib/ad";
 import type { Lang } from "@/lib/i18n";
 
@@ -40,6 +42,14 @@ export default function AdCard({ lang }: { lang: Lang }) {
           <span className="ad-meta">
             <span className="ad-name">{ad.name}</span>
             <span className="ad-label">{ad.label[lang]}</span>
+          </span>
+          <span key={text} className="ad-text">
+            {text}
+          </span>
+          <span className="ad-actions">
+            <a className="ad-cta" href={primary} target="_blank" rel="noopener sponsored">
+              {ad.cta[lang]} →
+            </a>
             <span className="ad-stores">
               <a href={ad.appStore} target="_blank" rel="noopener sponsored">
                 App Store
@@ -50,13 +60,7 @@ export default function AdCard({ lang }: { lang: Lang }) {
               </a>
             </span>
           </span>
-          <span key={text} className="ad-text">
-            {text}
-          </span>
         </div>
-        <a className="ad-cta" href={primary} target="_blank" rel="noopener sponsored">
-          {ad.cta[lang]}
-        </a>
         <button type="button" className="ad-close" aria-label={ad.close[lang]} onClick={() => setClosed(true)}>
           ×
         </button>
