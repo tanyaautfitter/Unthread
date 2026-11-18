@@ -249,3 +249,4 @@ body > main { flex: 1; width: 100%; }
   .ad-stores { display: none; }
   .ad-text { font-size: 15px; min-height: 0; }
 }
+.wrap.with-ad { padding-bottom: 150px; }

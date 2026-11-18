@@ -56,7 +56,7 @@ export default function HomeClient({ lang }: { lang: Lang }) {
   const total = data ? data.counts.positive + data.counts.negative + data.counts.neutral : 0;
 
   return (
-    <main className="wrap">
+    <main className={`wrap${data && !loading ? " with-ad" : ""}`}>
       <header className={`hero${!data && !loading ? " hero-center" : ""}`}>
         <h1>{t.heading}</h1>
 
