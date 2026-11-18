@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import type { AnalyzeResult, ClassifiedPost, Sentiment } from "@/lib/types";
 import { dict, mentions, type Dict, type Lang } from "@/lib/i18n";
+import AdCard from "./components/AdCard";
 
 const COLUMNS: Array<{ key: Sentiment; emoji: string }> = [
   { key: "negative", emoji: "−" },
@@ -95,6 +96,12 @@ export default function HomeClient({ lang }: { lang: Lang }) {
             ))}
           </p>
         )}
+
+        {!data && !loading && (
+          <div className="ad-slot">
+            <AdCard lang={lang} />
+          </div>
+        )}
       </header>
 
       {error && <div className="alert">{error}</div>}
@@ -136,6 +143,10 @@ export default function HomeClient({ lang }: { lang: Lang }) {
             ))}
           </section>
           )}
+
+          <div className="ad-slot ad-slot-results">
+            <AdCard lang={lang} />
+          </div>
         </>
       )}
     </main>

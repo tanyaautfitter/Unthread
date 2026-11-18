@@ -53,7 +53,7 @@ export const dict = {
     metaDescription:
       "Введіть назву бренду й дізнайтеся, скільки позитивних, негативних і нейтральних згадок про нього в Threads.",
     heading: "Говір про бренд у Threads",
-    suggestions: ["Adore Shoes", "Укрзалізниця", "Бажане", "One by One", "Cher17", "Estro"],
+    suggestions: ["Adore Shoes", "Укрзалізниця", "Бажане", "Autfitter", "One by One", "Cher17", "Estro"],
     placeholder: "Назва бренду",
     search: "Пошук",
     searching: "Пошук…",
@@ -86,7 +86,7 @@ export const dict = {
     metaDescription:
       "Enter a brand name to see how many positive, negative and neutral mentions it has on Threads.",
     heading: "What are people saying about a brand on Threads?",
-    suggestions: ["Paris Texas", "Nude Project", "Alo", "Lounge Nine", "Wang"],
+    suggestions: ["Paris Texas", "Nude Project", "Autfitter", "Alo", "Lounge Nine", "Wang"],
     placeholder: "Brand name",
     search: "Search",
     searching: "Searching…",
