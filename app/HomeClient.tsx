@@ -96,12 +96,6 @@ export default function HomeClient({ lang }: { lang: Lang }) {
             ))}
           </p>
         )}
-
-        {!data && !loading && (
-          <div className="ad-slot">
-            <AdCard lang={lang} />
-          </div>
-        )}
       </header>
 
       {error && <div className="alert">{error}</div>}
@@ -143,12 +137,9 @@ export default function HomeClient({ lang }: { lang: Lang }) {
             ))}
           </section>
           )}
-
-          <div className="ad-slot ad-slot-results">
-            <AdCard lang={lang} />
-          </div>
         </>
       )}
+      <AdCard lang={lang} />
     </main>
   );
 }

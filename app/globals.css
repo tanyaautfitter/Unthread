@@ -207,18 +207,19 @@ body > main { flex: 1; width: 100%; }
 .lang-switch button:hover { color: var(--ink); }
 .lang-switch button.active { background: var(--accent); color: #fff; }
 
-/* ---------- Ad: Autfitter ---------- */
-.ad-slot { display: flex; justify-content: center; margin-top: 44px; }
-.ad-slot-results { margin-top: 32px; }
-.ad-card {
-  display: flex; align-items: center; gap: 14px; width: 100%; max-width: 520px; padding: 12px 14px;
-  min-height: 86px; border: 1px solid var(--line); border-radius: 16px; background: #fff; color: var(--ink); text-decoration: none;
-  text-align: left; transition: box-shadow .2s, border-color .2s;
+/* ---------- Ad: Autfitter (floating, bottom) ---------- */
+.ad-float {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 50;
+  width: calc(100% - 32px); max-width: 560px; animation: adIn .5s cubic-bezier(.2,.8,.2,1);
 }
-.ad-card:hover { border-color: transparent; box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1); }
+.ad-card {
+  position: relative; display: flex; align-items: center; gap: 14px; padding: 12px 14px; min-height: 92px;
+  border: 1px solid var(--line); border-radius: 18px; background: #fff; color: var(--ink);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.14);
+}
 .ad-logo-wrap { flex: none; width: 56px; height: 56px; }
 .ad-logo { width: 56px; height: 56px; border-radius: 13px; display: block; animation: adFade .5s ease; }
-.ad-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.ad-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; text-align: left; }
 .ad-meta { display: flex; align-items: center; gap: 8px; font-size: 12px; }
 .ad-name { font-weight: 700; }
 .ad-label {
@@ -226,9 +227,24 @@ body > main { flex: 1; width: 100%; }
   text-transform: uppercase; letter-spacing: 0.06em;
 }
 .ad-text { font-size: 15px; line-height: 1.35; animation: adFade .5s ease; }
+.ad-stores { display: flex; gap: 6px; font-size: 12px; color: var(--muted); }
+.ad-stores a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+.ad-stores a:hover { color: var(--ink); }
 .ad-cta {
-  flex: none; background: #c8030a; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 14px; border-radius: 18px;
+  flex: none; background: #c8030a; color: #fff; font-size: 14px; font-weight: 600; padding: 9px 18px;
+  border-radius: 20px; text-decoration: none; margin-right: 18px;
 }
+.ad-cta:hover { background: #a80208; }
+.ad-close {
+  position: absolute; top: 6px; right: 8px; width: 24px; height: 24px; border: 0; border-radius: 12px;
+  background: transparent; color: var(--muted); font-size: 18px; line-height: 1;
+}
+.ad-close:hover { background: var(--neu-soft); color: var(--ink); }
+@keyframes adIn { from { opacity: 0; transform: translate(-50%, 24px); } to { opacity: 1; transform: translate(-50%, 0); } }
 @keyframes adFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .ad-logo, .ad-text { animation: none; } }
-@media (max-width: 480px) { .ad-cta { display: none; } }
+@media (prefers-reduced-motion: reduce) { .ad-float, .ad-logo, .ad-text { animation: none; } }
+@media (max-width: 480px) {
+  .ad-float { bottom: 12px; }
+  .ad-cta { padding: 8px 12px; font-size: 13px; margin-right: 14px; }
+  .ad-text { font-size: 14px; }
+}
