@@ -29,8 +29,8 @@ export const autfitterAd = {
   label: { uk: "Реклама", en: "Ad" } satisfies Record<Lang, string>,
   cta: { uk: "Спробувати", en: "Try it" } satisfies Record<Lang, string>,
   close: { uk: "Закрити рекламу", en: "Close ad" } satisfies Record<Lang, string>,
-  /** Через скільки мілісекунд після відкриття сторінки з'являється реклама */
-  delayMs: 5000,
+  /** Через скільки мілісекунд після появи результатів з'являється реклама */
+  delayMs: 0,
   /** Скільки мілісекунд показується кожен текст */
   intervalMs: 4000,
 };
