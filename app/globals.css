@@ -207,46 +207,53 @@ body > main { flex: 1; width: 100%; }
 .lang-switch button:hover { color: var(--ink); }
 .lang-switch button.active { background: var(--accent); color: #fff; }
 
-/* ---------- Ad: Autfitter (small, bottom-right, brand colours) ---------- */
-.ad-float {
-  position: fixed; right: 20px; bottom: 20px; z-index: 50; width: 330px;
-  animation: adIn .7s cubic-bezier(.2,.8,.2,1);
-}
+/* ---------- Ad: Autfitter (brand: red #C8030A, white, black #101010) ---------- */
+.results-layout { display: grid; gap: 16px; }
+.ad-aside { min-width: 0; }
 .ad-card {
-  position: relative; display: flex; align-items: flex-start; gap: 12px; padding: 12px 30px 12px 12px;
-  background: #f6efe4; color: #160507; border-radius: 14px;
+  position: relative; display: flex; align-items: center; gap: 14px; padding: 14px 16px;
+  background: #fff; color: #101010; border: 1px solid #101010; border-radius: 14px;
 }
-.ad-logo-wrap { flex: none; width: 48px; height: 48px; }
-.ad-logo { width: 48px; height: 48px; border-radius: 11px; display: block; animation: adFade .7s ease; }
-.ad-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; text-align: left; }
-.ad-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; font-size: 11px; color: rgba(22, 5, 7, 0.55); }
-.ad-name { font-weight: 600; color: #160507; }
-.ad-label::before { content: "·"; margin-right: 5px; }
-.ad-actions { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-top: 2px; white-space: nowrap; }
-.ad-stores { display: inline-flex; gap: 5px; font-size: 11px; color: rgba(22, 5, 7, 0.55); }
-.ad-stores a { color: inherit; text-decoration: none; }
-.ad-stores a:hover { color: #160507; text-decoration: underline; }
+.ad-label {
+  position: absolute; top: 8px; right: 10px; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #6b6a72; border: 1px solid #d6d6da; border-radius: 4px; padding: 0 5px;
+}
+.ad-logo-wrap { flex: none; width: 56px; height: 56px; }
+.ad-logo { width: 100%; height: 100%; border-radius: 13px; display: block; animation: adFade .6s ease; }
+.ad-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; text-align: left; }
+.ad-name { font-size: 12px; font-weight: 700; letter-spacing: 0.02em; }
 .ad-text {
   font-family: "Playfair Display", Georgia, "Times New Roman", serif; font-style: italic; font-weight: 500;
-  font-size: 17px; line-height: 1.25; min-height: 2.5em; animation: adFade .7s ease;
+  font-size: 17px; line-height: 1.25; animation: adFade .6s ease;
 }
+.ad-actions { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: none; }
 .ad-cta {
-  color: #c8030a; font-size: 13px; font-weight: 600; text-decoration: none;
+  background: #c8030a; color: #fff; font-size: 14px; font-weight: 600; text-decoration: none;
+  padding: 9px 20px; border-radius: 20px; white-space: nowrap;
 }
-.ad-cta:hover { text-decoration: underline; text-underline-offset: 2px; }
-.ad-close {
-  position: absolute; top: 6px; right: 6px; width: 22px; height: 22px; border: 0; border-radius: 11px;
-  background: transparent; color: rgba(22, 5, 7, 0.45); font-size: 16px; line-height: 1; display: grid; place-items: center;
-}
-.ad-close:hover { background: rgba(22, 5, 7, 0.06); color: #160507; }
-@keyframes adIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.ad-cta:hover { background: #a80208; }
+.ad-stores { display: inline-flex; gap: 5px; font-size: 11px; color: #6b6a72; white-space: nowrap; }
+.ad-stores a { color: inherit; text-decoration: none; }
+.ad-stores a:hover { color: #101010; text-decoration: underline; }
 @keyframes adFade { from { opacity: 0; } to { opacity: 1; } }
-@media (prefers-reduced-motion: reduce) { .ad-float, .ad-logo, .ad-text { animation: none; } }
-@media (max-width: 560px) {
-  .ad-float { right: 12px; left: 12px; bottom: 12px; width: auto; }
-  .ad-card { padding: 10px 28px 10px 10px; gap: 10px; }
-  .ad-logo-wrap, .ad-logo { width: 42px; height: 42px; }
-  .ad-stores { display: none; }
-  .ad-text { font-size: 15px; min-height: 0; }
+@media (prefers-reduced-motion: reduce) { .ad-logo, .ad-text { animation: none; } }
+
+/* Широкий екран: вертикальний банер праворуч від колонок */
+@media (min-width: 1100px) {
+  .results-layout { grid-template-columns: minmax(0, 1fr) 210px; align-items: start; }
+  .ad-aside { position: sticky; top: 20px; }
+  .ad-card { flex-direction: column; align-items: stretch; text-align: center; padding: 30px 16px 18px; gap: 14px; }
+  .ad-logo-wrap { width: 96px; height: 96px; margin: 0 auto; }
+  .ad-logo { border-radius: 22px; }
+  .ad-body { text-align: center; gap: 6px; }
+  .ad-text { font-size: 19px; min-height: 4.2em; }
+  .ad-actions { align-items: stretch; }
+  .ad-cta { text-align: center; }
 }
-.wrap.with-ad { padding-bottom: 150px; }
+@media (max-width: 560px) {
+  .ad-card { gap: 10px; padding: 24px 12px 12px; }
+  .ad-logo-wrap { width: 46px; height: 46px; }
+  .ad-text { font-size: 15px; }
+  .ad-stores { display: none; }
+  .ad-cta { padding: 8px 14px; font-size: 13px; }
+}

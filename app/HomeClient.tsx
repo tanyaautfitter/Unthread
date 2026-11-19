@@ -56,7 +56,7 @@ export default function HomeClient({ lang }: { lang: Lang }) {
   const total = data ? data.counts.positive + data.counts.negative + data.counts.neutral : 0;
 
   return (
-    <main className={`wrap${data && !loading ? " with-ad" : ""}`}>
+    <main className="wrap">
       <header className={`hero${!data && !loading ? " hero-center" : ""}`}>
         <h1>{t.heading}</h1>
 
@@ -120,6 +120,7 @@ export default function HomeClient({ lang }: { lang: Lang }) {
             {total > 0 ? `${total} ${mentions(total, lang)}` : t.nothingFound}
           </h2>
 
+          <div className="results-layout">
           {total > 0 && (
           <section className="grid">
             {COLUMNS.map((c) => (
@@ -137,9 +138,12 @@ export default function HomeClient({ lang }: { lang: Lang }) {
             ))}
           </section>
           )}
+            <aside className="ad-aside">
+              <AdCard key={data.brand} lang={lang} />
+            </aside>
+          </div>
         </>
       )}
-      {data && !loading && <AdCard key={data.brand} lang={lang} />}
     </main>
   );
 }
